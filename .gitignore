@@ -1,0 +1,8 @@
+bin/*.swf
+lib/
+# OS X
+.DS_Store
+*.swo
+*.swp
+node_modules/
+npm-debug.log

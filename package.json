@@ -1,0 +1,37 @@
+{
+  "name": "DataVisualizationExample",
+  "version": "1.0.0",
+  "description": "This is a larger project that has a node.js JSON data service that is consumed by a phonegapable client",
+  "keywords": [
+    "Node.js",
+    "easelJS",
+    "actionscript",
+    "fdt"
+  ],
+  "author": {
+    "name": "Rich Hildred",
+    "email": "rhildred@gmail.com",
+    "url": "http://syndicateme.net/"
+  },
+  "homepage": "https://github.com/rhildred/DataVisualizationExample",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhildred/DataVisualizationExample"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "assert-runner": "*",
+    "js-toolbox": "*",
+    "render-async": "*",
+    "socket.io": "*"
+  },
+  "scripts": {
+	    "test": "./test.js"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "main": "server.js"
+}

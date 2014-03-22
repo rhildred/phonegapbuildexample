@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html>
 <body>
-<div id="phoneGapLoaded">running on a browser</div>
-<div>
-<p>accelerometer x: <span id="x">0</span></p>
-<p>accelerometer y: <span id="y">0</span></p>
-<p>accelerometer z: <span id="z">0</span></p>
-<p>accelerometer timestamp: <span id="timestamp">0</span></p>
-</div>
-<script src="js/jquery-1.11.0.min.js"></script>
-<script src="js/js-toolbox.js"></script>
-<script src="phonegap.js"></script>
-<script>
-jQuery(document).ready(function(){
-	
-	var Watcher = Toolbox.Base.extend({
-		constructor: function(){
-		    // Wait for PhoneGap to load
-		    //
-		    document.addEventListener("deviceready", jQuery.proxy(this.deviceReady, this), false);
-		},
-		deviceReady: function(){
-			jQuery("#phoneGapLoaded").html("running in phonegap");
-		     // Update acceleration every 3 seconds
-	        var options = { frequency: 300 };
+	<h1>Device Orientation</h1>
+	<div>
+		<p>
+			alpha: <span id="alpha">0</span>
+		</p>
+		<p>
+			beta: <span id="beta">0</span>
+		</p>
+		<p>
+			gamma: <span id="gamma">0</span>
+		</p>
+		<p>
+			accelerometer timestamp: <span id="timestamp">0</span>
+		</p>
+	</div>
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/js-toolbox.js"></script>
+	<script>
+		var Watcher = Toolbox.Base.extend({
+			constructor : function() {
+				if (window.DeviceOrientationEvent) {
+					// Listen for the event and handle DeviceOrientationEvent object
+					window.addEventListener('deviceorientation', jQuery.proxy(
+							this.showPosition, this), false);
+				}
+			},
+			showPosition : function(oOrientation) {
+				jQuery("#alpha").html(oOrientation.alpha);
+				jQuery("#beta").html(oOrientation.beta);
+				jQuery("#gamma").html(oOrientation.gamma);
+				var oDate = new Date();
+				jQuery("#timestamp").html(oDate.getHours() + ":" + oDate.getMinutes() + ":" + oDate.getSeconds());
+			},
+			showError : function(oError) {
+				console.log(oError);
+			}
+		});
+		
+		jQuery(document).ready(function() {
 
-	        navigator.accelerometer.watchAcceleration(jQuery.proxy(this.showPosition, this), 
-	        		jQuery.proxy(this.showError, this), 
-	        		options);
-		},
-		showPosition: function(oAccelerometer){
-			jQuery("#x").html(oAccelerometer.x);
-			jQuery("#y").html(oAccelerometer.y);
-			jQuery("#z").html(oAccelerometer.z);
-			jQuery("#timestamp").html(oAccelerometer.timestamp);
-		},
-		showError: function(oError){
-			console.log(oError);
-		}
-	});
-	
-	
-	new Watcher();
-	
-	
-});
-</script>
+			new Watcher();
+
+		});
+	</script>
 </body>
 </html>
